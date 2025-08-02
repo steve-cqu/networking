@@ -105,6 +105,29 @@ Add a route to a specific subnet (3.3.3.0/24) via router 1.1.1.1 using interface
 ip route add 3.3.3.0/24 via 1.1.1.1 dev eth0
 ``` 
 
+## sysctl: enabling forwarding
+
+In Linux, a host will not forward IP packets but a router will. There is an operating system parameter that determines if the Linux device will forward packets or not. The parameter is changed with the ``sysctl`` command:
+
+To see the current status:
+
+```
+sysctl net.ipv4.ip_forward
+```
+
+To enable forwarding (making the device a router):
+```
+sysctl net.ipv4.ip_forward=1
+```
+
+To disable forwarding (making the device a host):
+```
+sysctl net.ipv4.ip_forward=0
+```
+
+In large networks, there can be significant hardware differences between routers and hosts, but conceptually in our simplified model of a network, it is whether the device forwards or not.
+
+
 ## ping: testing network communications
 
 ping is a widely used tool to test layer 3 network communications, i.e., to check that a destination host or router is reachable using ICMP. It also reports the round-trip-time (as well as other information). Simply specific the destination IP address, e.g.:
