@@ -41,7 +41,7 @@ In Linux, all computers can generally be either a host or router. It is a small 
 
 We will assume each host and router has 1 or more physical network adapters, and each adapter is assigned an interface name in Linux. Interfaces are often named based on the type of network technology and the number of the adapter in the computer. As Ethernet is widely used, you will commonly see interfaces called: ``eth0``, ``eth1``, ``eth2`` and so on. However another naming scheme is ``enp0s0``, ``enp0s1``, ``enp1s0``, and so on. For wireless adapters, interfaces may be ``wl0``, ``wlo1``, ``wifi2`` and similar. Other interface names you may come across include: ``lo``, ``vboxnet0``, ``tun2``, ``br`` (loopback, VirtualBox network, tunnel, bridge). Interfaces are assigned to network adapter devices, so ``dev`` is used to refer to an interface in many commands.
 
-![Simple Linux Network 1](../images/simple-linux-network-1.png)
+![Simple Linux Network 1](./images/simple-linux-network-1.png)
 
 ## ip: viewing and setting networking configuration
 
