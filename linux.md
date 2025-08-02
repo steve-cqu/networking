@@ -43,7 +43,7 @@ We will assume each host and router has 1 or more physical network adapters, and
 
 ![Simple Linux Network 1](./images/simple-linux-network-1.png)
 
-## ip: viewing and setting networking configuration
+## ip: Viewing and setting networking configuration
 
 The ``ip`` command is used for viewing and setting networking configurations, usually applied to interfaces on a host or router. The command has multiple objects to operate on, and supports various options. To see them, simply run ``ip`` or view the man(ual) page (in Linux with ``man ip`` or searching online). Here we show selected ``ip`` commands to get started. We show the command via examples. You will need to change values, e.g., the actual IP address or interface name must be specified.
 
@@ -107,7 +107,7 @@ Add a route to a specific subnet (3.3.3.0/24) via router 1.1.1.1 using interface
 ip route add 3.3.3.0/24 via 1.1.1.1 dev eth0
 ``` 
 
-## sysctl: enabling forwarding
+## sysctl: Enabling forwarding
 
 In Linux, a host will not forward IP packets but a router will. There is an operating system parameter that determines if the Linux device will forward packets or not. The parameter is changed with the ``sysctl`` command:
 
@@ -130,7 +130,7 @@ sysctl net.ipv4.ip_forward=0
 In large networks, there can be significant hardware differences between routers and hosts, but conceptually in our simplified model of a network, it is whether the device forwards or not.
 
 
-## ping: testing network communications
+## ping: Testing network communications
 
 ping is a widely used tool to test layer 3 network communications, i.e., to check that a destination host or router is reachable using ICMP. It also reports the round-trip-time (as well as other information). Simply specific the destination IP address, e.g.:
 
@@ -143,7 +143,7 @@ To stop the ping, use Ctrl-C. To limit the number of pings so it automatically s
 ping -c 3 2.2.2.2
 ```
 
-## nc: testing application communications
+## nc: Testing application communications
 
 ping uses ICMP to communicate with another host or router. Sometimes you want to test application level communications, using TCP as a transport protocol. netcat, abbreviated to ``nc``, can be used as a client and server to test a simple TCP connection. netcat (nc) requires running in server mode on one device, and then in client mode on another device.
 
@@ -167,11 +167,59 @@ To end nc, press Ctrl-C.
 
 Be careful: different variants of Linux (or BSD) use different implementations of netcat, and the options are not always identical. Often if you just run the command with no options, e.g. ``nc``, a short help will be shown.
 
-## iperf: testing throughput performance
+## iperf: Testing throughput performance
 
 
+## nano: Text Editor
 
+Many Linux systems come with the nano text editor. If nano is not installed, you will need to use the vi text editor. To start the text editor, specify the filename to edit, e.g., to edit the ``interfaces`` file within the directory ``/etc/network``:
 
+```
+nano /etc/network/interfaces
+```
+
+You can directly edit with your keyboard. The menu is at the bottom, with ^ meaning Ctrl. To save, Ctrl-O. To exit, Ctrl-X. 
+
+## vi: Text Editor
+
+If nano is not installed, then it is highly likely vi text editor is. vi is not as straight forward as nano. Open a file:
+
+```
+vi /etc/network/interfaces
+```
+
+To make edits, you must enter insert mode by pressing ``i``. Now you can edit. To save/exit you must first exit insert mode by pressing ESQ. Then type ``:wq`` to write (save) and quit.
+
+## /etc/network/interfaces: Persistent IP Addresses
+
+We can use the ``ip address`` command to set an IP address for an interface in Linux. But upon reboot, that setting is lost. To maintain the IP configuration across reboots, you can edit the file ``/etc/network/interfaces`` with nano or vi.
+
+```
+nano /etc/network/interfaces
+```
+
+Lines starting with # are commented out. Remove the # for the line(s) to have effect.
+
+There are two common approaches: static IP or dynamic IP from DHCP server. For a static IP, the syntax is:
+
+```
+auto eth0
+iface eth0 inet static
+   address 1.1.1.22
+   netmask 255.255.255.0
+   gateway 1.1.1.1
+```
+
+Change the interface, IP, netmask and default router (gateway) as required.
+
+To automatically obtain an IP from a DHCP server use:
+
+```
+auto eth1
+iface eth1 inet dhcp
+```
+
+After editing the file, either reboot or turn the interface down then up.
 
 
 
