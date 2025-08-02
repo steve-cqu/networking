@@ -49,13 +49,13 @@ The ``ip`` command is used for viewing and setting networking configurations, us
 
 View your IP addresses (and other information) for each interface:
 
-```bash
+```
 ip address show
 ```
 
 Set the IP address for a specific interface (example with IP 1.1.1.1 with network mask /24 and applied to interface device ``eth0``):
 
-```bash
+```
 ip address add 1.1.1.1/24 dev eth0
 ```
 
@@ -65,13 +65,13 @@ The interface connects to a link. You can use the link object to turn an interfa
 
 Turn an interface off (down):
 
-```bash
+```
 ip link set eth0 down
 ```
 
 Turn an interface on (up):
 
-```bash
+```
 ip link set eth0 up
 ```
 
@@ -79,7 +79,7 @@ ip link set eth0 up
 
 ARP is used automatically by Linux computers to find the hardware address of neighbours on the same subnet. While we do not normally need to get involved in the ARP process, it is useful to view current ARP table:
 
-```bash
+```
 ip neigh show
 ```
 
@@ -89,26 +89,61 @@ You will often be interested in the: IP address, interface, hardware address and
 
 View the routing table of your Linux computer:
 
-```bash
+```
 ip route show
 ```
 
 Add a default route via router 1.1.1.1 using interface eth0:
 
-```bash
+```
 ip route add default via 1.1.1.1 dev eth0
 ```
 
 Add a route to a specific subnet (3.3.3.0/24) via router 1.1.1.1 using interface eth0:
 
-```bash
+```
 ip route add 3.3.3.0/24 via 1.1.1.1 dev eth0
 ``` 
 
-
 ## ping: testing network communications
 
+ping is a widely used tool to test layer 3 network communications, i.e., to check that a destination host or router is reachable using ICMP. It also reports the round-trip-time (as well as other information). Simply specific the destination IP address, e.g.:
+
+```
+ping 1.1.1.1
+```
+To stop the ping, use Ctrl-C. To limit the number of pings so it automatically stops, use the ``-c`` option:
+
+```
+ping -c 3 2.2.2.2
+```
+
 ## nc: testing application communications
+
+ping uses ICMP to communicate with another host or router. Sometimes you want to test application level communications, using TCP as a transport protocol. netcat, abbreviated to ``nc``, can be used as a client and server to test a simple TCP connection. netcat (nc) requires running in server mode on one device, and then in client mode on another device.
+
+Start nc in server mode on device with IP 2.2.2.2 using port 12345:
+
+```
+nc -l -p 12345
+```
+
+It should show a blank line if it starts successfully. It will not return to the prompt; it just sits there waiting until a client connects.
+
+Now on device with IP 1.1.1.1, start nc in client mode:
+
+```
+nc 2.2.2.2 12345
+```
+
+Again, it waits for input. Now you can type in a message, e.g. ``hello`` at the client, and that message should be shown at the server. You can also type in a message at the server to send to the client.
+
+To end nc, press Ctrl-C.
+
+Be careful: different variants of Linux (or BSD) use different implementations of netcat, and the options are not always identical. Often if you just run the command with no options, e.g. ``nc``, a short help will be shown.
+
+## iperf: testing throughput performance
+
 
 
 
