@@ -63,7 +63,15 @@ ip address add 1.1.1.1/24 dev eth0
 
 ## Links
 
-The interface connects to a link. You can use the link object to turn an interface on or off, which is referred to as up or down.
+The interface connects to a link. You can view link information with:
+
+```
+ip link show
+```
+
+For our simple cases, this does not give us much more information than ``ip addres show``, so we will not use it often.
+
+You can also use the link object to turn an interface on or off, which is referred to as up or down.
 
 Turn an interface off (down):
 
@@ -75,6 +83,13 @@ Turn an interface on (up):
 
 ```
 ip link set eth0 up
+```
+
+There is an alternative way to turn links down/ip without the ``ip link`` command. Instead you can use ``ifdown`` and ``ifup``. The advantage of these is that they also reload the ``/etc/network/interfaces`` file, however not all variants of Linux include these commands (whereas the ``ip`` command is very common).
+
+```
+ipdown eth0
+ifup eth0
 ```
 
 ## ARP and Neighbours
@@ -234,7 +249,12 @@ auto eth1
 iface eth1 inet dhcp
 ```
 
-After editing the file, either reboot or turn the interface down then up.
+After editing the file, either reboot or turn the interface down then up with the ``ifdown`` and ``ifup`` commands (note that ``ip link set`` command will *not* reload the ``/etc/network/interfaces`` file).
+
+```
+ifdown eth0
+ifup eth0
+```
 
 # OpenWRT: Basic Networking
 
