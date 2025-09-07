@@ -19,10 +19,12 @@ In nano (and many aspects of Linux), to save a file involved *writing* the file 
 
 If you attempt to exit without a file being saved you will be prompted if you really
 
-![nano Exit before Save](./images/nano-exit-only.gif)
+![nano Exit before Save](./images/nano-save-only.gif)
 
 
 ### nano: Cut and Paste Lines with Ctrl-k and Ctrl-u
+
+You can cut entire lines with Ctrl-k and then paste back with Ctrl-u.
 
 ![nano Cut and Paste](./images/nano-cut-paste.gif)
 
@@ -42,5 +44,8 @@ To switch back to Command mode, press *Esc* (the Escape key)
 ### vi: Save and Exit with :w and :q
 
 When you are in Command mode, to save (write) a file press *:w* and to exit (quit) from vi press *:q*. You can even combined them into *:wq*.
+
+![nano Save and Exit](./images/vi-save-exit.gif)
+
 
 
