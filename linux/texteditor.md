@@ -13,13 +13,19 @@ You can immediately start typing your text content. You will see the menu at the
 
 ### nano: Save and Exit with Ctrl-o and Ctrl-x
 
-In nano (and many aspects of Linux), to save a file involved *writing* the file out to disk. In nano to save a file press Ctrl and o. 
+In nano (and many aspects of Linux), to save a file involved *writing* the file out to disk. In nano to save a file press Ctrl and o. Once saved you can exit with Ctrl-x:
 
-![nano Save and Exit](./images/)
+![nano Save and Exit](./images/nano-save-exit.gif)
 
+If you attempt to exit without a file being saved you will be prompted if you really
+
+![nano Exit before Save](./images/nano-exit-only.gif)
 
 
 ### nano: Cut and Paste Lines with Ctrl-k and Ctrl-u
+
+![nano Cut and Paste](./images/nano-cut-paste.gif)
+
 
 ## vi: A Widely Available Text Editor
 
